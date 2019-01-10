@@ -1,7 +1,11 @@
-#training 
+# Siamese model with CNN encoding
 
-python3 train.py [train.json]
+## Training
+```
+python3 train.py  [train.json]
+```
 
-#testing
 
+## Testing
+```
 python3 predict.py [test.json] [model]
