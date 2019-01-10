@@ -1,4 +1,4 @@
-# Siamese model with CNN encoding
+# Two-layer Bidirectional LSTM
 
 ## Training
 ```
