@@ -171,10 +171,10 @@ for i in range(len(y)):
 			tna += 1
 		else:
 			fna += 1
-print(tpa, tpe, tpf)
+#print(tpa, tpe, tpf)
 af1 = 2*tpa/(2*tpa + fna + fpa)
 ff1 = 2*tpf/(2*tpf + fnf + fpf)
 ef1 = 2*tpe/(2*tpe + fne + fpe)
-print((af1 + ff1 + ef1)/3)
-print(acc/len(y))
+print("F1 Score : ",(af1 + ff1 + ef1)/3)
+#print(acc/len(y))
 
