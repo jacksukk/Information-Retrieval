@@ -45,6 +45,16 @@ DROPOUT = 0.5
 HIDDEN = 64
 
 def load_data(fname):
+    """
+    Arguments
+        fname: string, path to your train_trans.json
+    Returns
+        X: A list of sentences
+        Position: A list of tuples, each tuple specifies the spans of head node and tail node
+        Entity: A list of tuples, each tuple specifies the types of head node and tail node
+        Y: A list of one-hot vectors, each specifies a relation type
+        sample_weight: The sample weight for avoiding class imbalance problem
+    """
     print("start loading data")
     X = []
     Position = []
@@ -68,6 +78,14 @@ def load_data(fname):
     return X, Position, Entity, Y, sample_weight
 
 def load_embedding(embedfile):
+    """
+    Arguments
+        embedfile: string, path to "glove.6B.200d.txt"
+    Returns
+        embeddict: dictionary, keys are words, values are the corresponding embeddings
+        word2idx: dictionary, maps each word to an index
+        embedding_matrix: numpy array, the embedding matrix to fill in the embedding layer
+    """
     print("start loading embedding")
     embeddict = dict()
     word2idx = dict()
@@ -94,6 +112,14 @@ def load_embedding(embedfile):
     return embeddict, word2idx, embedding_matrix
 
 def text2token(X, word2idx, seqlen=SEQLEN):
+    """
+    Arguments
+        X: list, input sentences
+        word2idx: dicitonary, maps each word to an index
+        seqlen: int, the length to pad to
+    Returns
+        X: list, output tokens
+    """
     print("start text2token")
     for idx, x in enumerate(X):
         tmp = []
@@ -112,6 +138,12 @@ def text2token(X, word2idx, seqlen=SEQLEN):
     return X
 
 def position2encoding(Position):
+    """
+    Arguments
+        Position: A list of tuples, each tuple specifies the spans of head node and tail node
+    Returns
+        Position: A list of 1d numpy array, each array is a position sequence specifying the spans of nodes
+    """
     print("start position2encoding")
     for idx, ([head_start, head_end], [tail_start, tail_end]) in enumerate(Position):
         hp = np.zeros(SEQLEN)
@@ -134,6 +166,12 @@ def position2encoding(Position):
 
 
 def lstm(embedding_matrix):
+    """
+    Arguments
+        embedding_matrix: numpy array, the embedding matrix to fill in the embedding layer
+    Returns
+        model: a keras model for relation classification
+    """
     inputs = Input(shape=(SEQLEN,))
     position = Input(shape=(SEQLEN,))
 

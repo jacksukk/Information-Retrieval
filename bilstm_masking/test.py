@@ -13,6 +13,9 @@ sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
 set_session(sess)
 
 def evaluate(result, Y):
+    """
+    Computes accuracy and precision, recall, f1 for each class
+    """
     acc = 0
     fp_dividend, fp_divisor = 0, 0
     fr_dividend, fr_divisor = 0, 0
